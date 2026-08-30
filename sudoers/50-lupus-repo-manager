@@ -1,0 +1,3 @@
+# LupuS Repo Manager — Sudoers configuration
+# Luppo ve Flatpak depo işlemlerini şifresiz root yetkisiyle çalıştırmaya izin verir
+ALL ALL=(ALL) NOPASSWD: /usr/bin/luppo, /usr/bin/flatpak

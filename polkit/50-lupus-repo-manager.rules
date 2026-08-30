@@ -1,0 +1,12 @@
+/* LupuS Repo Manager — Polkit Rules
+ * Luppo ve Flatpak depo yönetimi için şifresiz root yetkilendirmesi */
+polkit.addRule(function(action, subject) {
+    if ((action.id == "org.freedesktop.policykit.exec" &&
+         (action.lookup("program") == "/usr/bin/luppo" ||
+          action.lookup("program") == "/usr/bin/lupus-repo-manager" ||
+          action.lookup("program") == "/usr/bin/flatpak")) ||
+        action.id.indexOf("tr.org.luppo") === 0 ||
+        action.id.indexOf("org.freedesktop.Flatpak") === 0) {
+        return polkit.Result.YES;
+    }
+});

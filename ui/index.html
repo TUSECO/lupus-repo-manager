@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LupuS Repo Manager</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<div id="app">
+  <!-- ══════════════════════════════════════════════════════════════
+       SIDEBAR
+  ══════════════════════════════════════════════════════════════ -->
+  <nav id="sidebar">
+    <div class="sidebar-header">
+      <img src="assets/icons/repo-manager.png" alt="logo" onerror="this.style.display='none'"/>
+      <div>
+        <div class="app-name" id="t-app-title" data-i18n="app_title">LupuS Repo Manager</div>
+        <div class="app-subtitle" data-i18n="app_subtitle">Luppo &amp; Flatpak</div>
+      </div>
+    </div>
+
+    <div class="sidebar-scroll">
+      <div class="sidebar-section-label" id="t-nav-general" data-i18n="nav_general">Genel</div>
+
+      <button class="nav-btn active" data-page="overview">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+          <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+        </svg>
+        <span id="t-overview" data-i18n="overview">Genel Bakış</span>
+      </button>
+
+      <div class="sidebar-section-label" id="t-nav-luppo" data-i18n="nav_luppo">Luppo</div>
+
+      <button class="nav-btn" data-page="luppo-repos">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 7h18M3 12h18M3 17h18"/>
+        </svg>
+        <span id="t-luppo_repos" data-i18n="luppo_repos">Luppo Depoları</span>
+      </button>
+
+      <div class="sidebar-section-label" id="t-nav-flatpak" data-i18n="nav_flatpak">Flatpak</div>
+
+      <button class="nav-btn" data-page="flatpak-remotes">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"/><path d="M12 1v3M12 20v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M1 12h3M20 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/>
+        </svg>
+        <span id="t-flatpak_remotes" data-i18n="flatpak_remotes">Flatpak Depoları</span>
+      </button>
+
+      <div class="sidebar-section-label" id="t-nav-tools" data-i18n="nav_tools">Araçlar</div>
+
+      <button class="nav-btn" data-page="mirrors">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+        </svg>
+        <span id="t-mirrors_bench" data-i18n="mirrors_bench">Yansımalar &amp; Hız Testi</span>
+      </button>
+
+      <button class="nav-btn" data-page="logs">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 12h6M9 16h3M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/>
+        </svg>
+        <span id="t-logs" data-i18n="logs">İşlem Günlüğü</span>
+      </button>
+
+      <button class="nav-btn" data-page="backup">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+        </svg>
+        <span id="t-backup_restore" data-i18n="backup_restore">Yedekle &amp; Geri Yükle</span>
+      </button>
+
+      <button class="nav-btn" data-page="settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+        <span id="t-settings" data-i18n="settings">Ayarlar</span>
+      </button>
+    </div>
+
+    <div class="sidebar-bottom">
+      <button class="theme-toggle" onclick="App.toggleTheme()">
+        <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+          <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+        </svg>
+        <span id="theme-label" data-i18n="theme_light">Açık Tema</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       MAIN CONTENT
+  ══════════════════════════════════════════════════════════════ -->
+  <div id="main">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div class="flex-1">
+        <div class="topbar-title" id="page-title" data-i18n="overview">Genel Bakış</div>
+      </div>
+      <div class="topbar-actions">
+        <button class="btn btn-primary" id="btn-sync-all" onclick="App.syncAll()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+          </svg>
+          <span id="t-sync_all" data-i18n="sync_all">Tüm Depoları Güncelle</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ─── PAGE: Overview ─── -->
+    <div class="content-area page active" id="page-overview">
+      <div class="stats-grid" id="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon accent">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 7h18M3 12h18M3 17h18"/>
+            </svg>
+          </div>
+          <div class="stat-info">
+            <div class="stat-value" id="stat-luppo-repos">—</div>
+            <div class="stat-label" id="t-total_repos" data-i18n="total_repos">Toplam Depo</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon success">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 6L9 17l-5-5"/>
+            </svg>
+          </div>
+          <div class="stat-info">
+            <div class="stat-value" id="stat-active-repos">—</div>
+            <div class="stat-label" id="t-active_repos" data-i18n="active_repos">Aktif Depolar</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon warning">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+            </svg>
+          </div>
+          <div class="stat-info">
+            <div class="stat-value" id="stat-total-packages">—</div>
+            <div class="stat-label" id="t-total_packages" data-i18n="total_packages">Toplam Paket</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon danger">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M12 1v3M12 20v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M1 12h3M20 12h3"/>
+            </svg>
+          </div>
+          <div class="stat-info">
+            <div class="stat-value" id="stat-flatpak-remotes">—</div>
+            <div class="stat-label" id="t-flatpak_apps" data-i18n="flatpak_apps">Flatpak Depoları</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Luppo Repos -->
+      <div class="section-header mb-16">
+        <div class="section-title" data-i18n="luppo_repos">Luppo Depoları</div>
+        <button class="btn btn-secondary" onclick="App.navigateTo('luppo-repos')" data-i18n="manage_all">
+          Tümünü Yönet →
+        </button>
+      </div>
+      <div id="overview-luppo-list" class="repo-table mb-24">
+        <div class="empty-state"><div class="spinner"></div></div>
+      </div>
+
+      <!-- Quick Flatpak Remotes -->
+      <div class="section-header mb-16">
+        <div class="section-title" data-i18n="flatpak_remotes">Flatpak Depoları</div>
+        <button class="btn btn-secondary" onclick="App.navigateTo('flatpak-remotes')" data-i18n="manage_all">
+          Tümünü Yönet →
+        </button>
+      </div>
+      <div id="overview-flatpak-list" class="repo-table">
+        <div class="empty-state"><div class="spinner"></div></div>
+      </div>
+    </div>
+
+    <!-- ─── PAGE: Luppo Repos ─── -->
+    <div class="content-area page" id="page-luppo-repos">
+      <div class="section-header mb-16">
+        <div class="section-title" id="t-luppo_repos-page" data-i18n="luppo_repos">Luppo Depoları</div>
+        <div class="flex-row">
+          <button class="btn btn-secondary" id="btn-add-preset-luppo" onclick="App.showPresetModal('luppo')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <path d="M8 12h8M12 8v8"/>
+            </svg>
+            <span data-i18n="preset_repos">Hazır Depolar</span>
+          </button>
+          <button class="btn btn-primary" onclick="App.showAddLuppoRepoModal()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/>
+            </svg>
+            <span id="t-add_repo" data-i18n="add_repo">Yeni Depo Ekle</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="luppo-repo-list" class="repo-table">
+        <div class="empty-state"><div class="spinner"></div></div>
+      </div>
+    </div>
+
+    <!-- ─── PAGE: Flatpak Remotes ─── -->
+    <div class="content-area page" id="page-flatpak-remotes">
+      <div class="section-header mb-16">
+        <div class="section-title" id="t-flatpak_remotes-page" data-i18n="flatpak_remotes">Flatpak Depoları</div>
+        <div class="flex-row">
+          <button class="btn btn-secondary" onclick="App.showPresetModal('flatpak')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <path d="M8 12h8M12 8v8"/>
+            </svg>
+            <span data-i18n="preset_repos">Hazır Depolar</span>
+          </button>
+          <button class="btn btn-primary" onclick="App.showAddFlatpakRemoteModal()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/>
+            </svg>
+            <span id="t-add_remote" data-i18n="add_remote">Yeni Flatpak Deposu Ekle</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="flex-row mb-16">
+        <span class="text-sm text-muted" data-i18n="filter">Filtrele:</span>
+        <button class="btn btn-secondary" id="fp-filter-all" onclick="App.filterFlatpak('all')" data-i18n="all">Tümü</button>
+        <button class="btn btn-secondary" id="fp-filter-system" onclick="App.filterFlatpak('system')" data-i18n="system">Sistem</button>
+        <button class="btn btn-secondary" id="fp-filter-user" onclick="App.filterFlatpak('user')" data-i18n="user">Kullanıcı</button>
+      </div>
+
+      <div id="flatpak-remote-list" class="repo-table">
+        <div class="empty-state"><div class="spinner"></div></div>
+      </div>
+    </div>
+
+    <!-- ─── PAGE: Mirrors & Speed Test ─── -->
+    <div class="content-area page" id="page-mirrors">
+      <div class="section-header mb-16">
+        <div class="section-title" id="t-mirrors_bench-page" data-i18n="mirrors_bench">Yansımalar &amp; Hız Testi</div>
+        <button class="btn btn-primary" onclick="App.pingAll()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+          </svg>
+          <span data-i18n="test_all">Tümünü Test Et</span>
+        </button>
+      </div>
+      <p class="text-sm text-muted mb-24" data-i18n="mirrors_desc">Her deponun ana URL'sine ve yansıma sunucularına HTTP HEAD isteği göndererek gecikme sürelerini ölçer.</p>
+      <div id="mirrors-list" class="repo-table">
+        <div class="empty-state">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+          </svg>
+          <h3 data-i18n="no_repos_found">Depo bulunamadı</h3>
+          <p data-i18n="no_repos_hint">Önce Luppo veya Flatpak deposu ekleyin.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── PAGE: Logs ─── -->
+    <div class="content-area page" id="page-logs">
+      <div class="section-header mb-16">
+        <div class="section-title" id="t-logs-page" data-i18n="logs">İşlem Günlüğü</div>
+        <button class="btn btn-secondary" onclick="App.clearLogs()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/>
+          </svg>
+          <span data-i18n="clear_logs">Günlüğü Temizle</span>
+        </button>
+      </div>
+      <div id="log-area" class="log-area">
+        <span class="log-entry text-muted" data-i18n="no_logs_yet">— Henüz işlem yapılmadı. Senkronizasyon veya depo işlemleri burada görünecek. —</span>
+      </div>
+    </div>
+
+    <!-- ─── PAGE: Backup & Restore ─── -->
+    <div class="content-area page" id="page-backup">
+      <div class="section-header mb-16">
+        <div class="section-title" id="t-backup_restore-page" data-i18n="backup_restore">Yedekle &amp; Geri Yükle</div>
+      </div>
+
+      <div class="stats-grid" style="grid-template-columns:1fr 1fr;">
+        <div class="stat-card" style="flex-direction:column;align-items:flex-start;gap:16px;padding:24px;">
+          <div class="flex-row">
+            <div class="stat-icon accent">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+              </svg>
+            </div>
+            <div>
+              <div class="section-title" data-i18n="backup_json_title">Yedekle (JSON)</div>
+              <div class="text-sm text-muted mt-1" data-i18n="backup_json_desc">Tüm depolar JSON dosyasına aktarılır.</div>
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="App.exportRepos()" data-i18n="backup_btn">Yedekle</button>
+        </div>
+
+        <div class="stat-card" style="flex-direction:column;align-items:flex-start;gap:16px;padding:24px;">
+          <div class="flex-row">
+            <div class="stat-icon warning">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+              </svg>
+            </div>
+            <div>
+              <div class="section-title" data-i18n="restore_json_title">Geri Yükle (JSON)</div>
+              <div class="text-sm text-muted mt-1" data-i18n="restore_json_desc">Daha önce alınan yedeği sisteme uygular.</div>
+            </div>
+          </div>
+          <button class="btn btn-warning" onclick="App.importRepos()" data-i18n="restore_btn">Geri Yükle</button>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+      <div class="section-title mb-8" data-i18n="backup_preview_title">Yedek İçeriği Önizleme</div>
+      <div id="backup-preview" class="log-area" style="height:280px;"></div>
+    </div>
+
+    <!-- ─── PAGE: Settings ─── -->
+    <div class="content-area page" id="page-settings">
+      <div class="section-header mb-16">
+        <div class="section-title" id="t-settings-page" data-i18n="settings">Ayarlar</div>
+        <button class="btn btn-primary" onclick="App.saveSettings()" data-i18n="save">Kaydet</button>
+      </div>
+
+      <div class="repo-table" style="max-width:520px;">
+        <div style="padding:20px;display:flex;flex-direction:column;gap:16px;">
+
+          <div class="form-group">
+            <label class="form-label" data-i18n="setting_theme">Tema</label>
+            <select class="form-input form-select" id="setting-theme">
+              <option value="dark" data-i18n="theme_dark">Koyu Tema</option>
+              <option value="light" data-i18n="theme_light">Açık Tema</option>
+              <option value="auto" data-i18n="theme_auto">Sistem Teması</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" data-i18n="setting_lang">Dil</label>
+            <select class="form-input form-select" id="setting-language">
+              <option value="tr">Türkçe</option>
+              <option value="en">English</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" data-i18n="setting_flatpak_scope">Varsayılan Flatpak Kapsamı</label>
+            <select class="form-input form-select" id="setting-flatpak-scope">
+              <option value="system" data-i18n="system_scope">Sistem Geneli (Root)</option>
+              <option value="user" data-i18n="user_scope">Kullanıcı (User)</option>
+            </select>
+          </div>
+
+          <div class="form-check">
+            <input type="checkbox" id="setting-auto-ping"/>
+            <label for="setting-auto-ping" data-i18n="setting_auto_ping">Uygulama açılışında Ping testi otomatik başlasın</label>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /#main -->
+</div><!-- /#app -->
+
+<!-- ══════════════════════════════════════════════════════════════
+     MODALS
+══════════════════════════════════════════════════════════════ -->
+
+<!-- Add Luppo Repo Modal -->
+<div class="modal-overlay hidden" id="modal-add-luppo">
+  <div class="modal">
+    <div class="modal-title" data-i18n="add_luppo_modal_title">Luppo Deposu Ekle</div>
+    <div class="form-group">
+      <label class="form-label" for="luppo-name" data-i18n="field_repo_name">Depo Adı *</label>
+      <input class="form-input" id="luppo-name" type="text" data-i18n-placeholder="placeholder_repo_name" placeholder="örn: stable"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="luppo-url" data-i18n="field_repo_url">Depo URL Adresi *</label>
+      <input class="form-input" id="luppo-url" type="url" data-i18n-placeholder="placeholder_repo_url" placeholder="https://..."/>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="luppo-mirrors"><span data-i18n="field_mirrors">Yansıma URL'leri</span> <span class="text-xs text-muted" data-i18n="field_mirrors_hint">(her satıra bir adres)</span></label>
+      <textarea class="form-input" id="luppo-mirrors" rows="3" placeholder="https://mirror1.example.com/...&#10;https://mirror2.example.com/..."></textarea>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="App.closeModal('modal-add-luppo')" data-i18n="cancel">İptal</button>
+      <button class="btn btn-primary" onclick="App.addLuppoRepo()" data-i18n="add">Ekle</button>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Luppo Repo Modal -->
+<div class="modal-overlay hidden" id="modal-edit-luppo">
+  <div class="modal">
+    <div class="modal-title" data-i18n="edit_luppo_modal_title">Luppo Deposunu Düzenle</div>
+    <input type="hidden" id="luppo-edit-name"/>
+    <div class="form-group">
+      <label class="form-label" data-i18n="field_repo_name_no_req">Depo Adı</label>
+      <input class="form-input" id="luppo-edit-name-display" type="text" disabled/>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="luppo-edit-url" data-i18n="field_url_req">URL Adresi *</label>
+      <input class="form-input" id="luppo-edit-url" type="url"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="luppo-edit-mirrors" data-i18n="field_mirrors">Yansıma URL'leri</label>
+      <textarea class="form-input" id="luppo-edit-mirrors" rows="3"></textarea>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="App.closeModal('modal-edit-luppo')" data-i18n="cancel">İptal</button>
+      <button class="btn btn-primary" onclick="App.editLuppoRepo()" data-i18n="save">Kaydet</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Flatpak Remote Modal -->
+<div class="modal-overlay hidden" id="modal-add-flatpak">
+  <div class="modal">
+    <div class="modal-title" data-i18n="add_flatpak_modal_title">Flatpak Deposu Ekle</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label" for="fp-name" data-i18n="field_repo_name">Depo Adı *</label>
+        <input class="form-input" id="fp-name" type="text" data-i18n-placeholder="placeholder_fp_name" placeholder="örn: flathub"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="fp-scope" data-i18n="field_scope">Kapsam</label>
+        <select class="form-input form-select" id="fp-scope">
+          <option value="system" data-i18n="system">Sistem</option>
+          <option value="user" data-i18n="user">Kullanıcı</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="fp-url" data-i18n="field_fp_url">URL veya .flatpakrepo Adresi *</label>
+      <input class="form-input" id="fp-url" type="text" data-i18n-placeholder="placeholder_fp_url" placeholder="https://dl.flathub.org/repo/flathub.flatpakrepo"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="fp-title" data-i18n="field_fp_title">Başlık (İsteğe Bağlı)</label>
+      <input class="form-input" id="fp-title" type="text" data-i18n-placeholder="placeholder_fp_title" placeholder="örn: Flathub"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="fp-comment" data-i18n="field_fp_comment">Yorum / Açıklama (İsteğe Bağlı)</label>
+      <input class="form-input" id="fp-comment" type="text" data-i18n-placeholder="placeholder_fp_comment" placeholder="Kısa bir açıklama"/>
+    </div>
+    <div class="form-check">
+      <input type="checkbox" id="fp-gpg" checked/>
+      <label for="fp-gpg" data-i18n="field_fp_gpg">GPG doğrulamasını etkinleştir</label>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="App.closeModal('modal-add-flatpak')" data-i18n="cancel">İptal</button>
+      <button class="btn btn-primary" onclick="App.addFlatpakRemote()" data-i18n="add">Ekle</button>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Flatpak Remote Modal -->
+<div class="modal-overlay hidden" id="modal-edit-flatpak">
+  <div class="modal">
+    <div class="modal-title" data-i18n="edit_flatpak_modal_title">Flatpak Deposunu Düzenle</div>
+    <input type="hidden" id="fp-edit-name"/>
+    <input type="hidden" id="fp-edit-scope"/>
+    <div class="form-group">
+      <label class="form-label" data-i18n="field_repo_name_no_req">Depo Adı</label>
+      <input class="form-input" id="fp-edit-name-display" disabled/>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="fp-edit-url" data-i18n="field_url_no_req">URL Adresi</label>
+      <input class="form-input" id="fp-edit-url" type="url"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="fp-edit-priority" data-i18n="field_fp_priority">Öncelik</label>
+      <input class="form-input" id="fp-edit-priority" type="number" min="0" max="100"/>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="App.closeModal('modal-edit-flatpak')" data-i18n="cancel">İptal</button>
+      <button class="btn btn-primary" onclick="App.editFlatpakRemote()" data-i18n="save">Kaydet</button>
+    </div>
+  </div>
+</div>
+
+<!-- Packages Browser Modal -->
+<div class="modal-overlay hidden" id="modal-packages">
+  <div class="modal modal-lg">
+    <div class="modal-title" id="packages-modal-title" data-i18n="packages_modal_title">Paketler</div>
+    <div class="flex-row mb-16">
+      <input class="form-input" id="packages-search" type="text" data-i18n-placeholder="placeholder_search_pkgs" placeholder="Paket ara..." oninput="App.filterPackages(this.value)" style="max-width:280px;"/>
+      <span class="text-sm text-muted" id="packages-count"></span>
+    </div>
+    <div id="packages-list" class="pkg-table">
+      <div class="empty-state"><div class="spinner"></div></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="App.closeModal('modal-packages')" data-i18n="close">Kapat</button>
+    </div>
+  </div>
+</div>
+
+<!-- Preset Repos Modal -->
+<div class="modal-overlay hidden" id="modal-presets">
+  <div class="modal modal-lg">
+    <div class="modal-title" id="t-popular_presets" data-i18n="popular_presets">Popüler Hazır Depolar</div>
+    <p class="text-sm text-muted mb-16" data-i18n="preset_hint">Depoya tıklayarak sisteminize ekleyebilirsiniz.</p>
+    <div id="preset-grid" class="preset-grid"></div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="App.closeModal('modal-presets')" data-i18n="close">Kapat</button>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm Modal -->
+<div class="modal-overlay hidden" id="modal-confirm">
+  <div class="modal modal-sm">
+    <div class="modal-title" id="confirm-title" data-i18n="confirm_title">Emin misiniz?</div>
+    <div class="confirm-msg" id="confirm-msg"></div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="App.closeModal('modal-confirm')" data-i18n="cancel">İptal</button>
+      <button class="btn btn-danger" id="confirm-ok-btn" onclick="App.confirmOk()" data-i18n="delete">Sil</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast container -->
+<div id="toast-container"></div>
+
+<!-- Hidden file input for import -->
+<input type="file" id="file-import" accept=".json" style="display:none" onchange="App.handleImportFile(this)"/>
+
+<script src="app.js"></script>
+</body>
+</html>
