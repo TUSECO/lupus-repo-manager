@@ -193,22 +193,22 @@ pub fn get_popular_presets() -> Vec<PresetRepo> {
             repo_type: "luppo".to_string(),
             name: "stable".to_string(),
             title: "LupuS (Stable)".to_string(),
-            url: "https://cdn.antolun.com/luppo/repo/stable".to_string(),
+            url: "https://cdn.tuseco.com/luppo/repo/stable".to_string(),
             description: "Official Repo for LupuS".to_string(),
             default_scope: "system".to_string(),
             mirrors: vec![
-                "https://cdn.antolun.com/luppo/repo/stable/luppo-index.json.xz".to_string(),
+                "https://cdn.tuseco.com/luppo/repo/stable/luppo-index.json.xz".to_string(),
             ],
         },
         PresetRepo {
             repo_type: "luppo".to_string(),
             name: "contrib".to_string(),
             title: "LupuS (Contrib)".to_string(),
-            url: "https://cdn.antolun.com/luppo/repo/contrib".to_string(),
+            url: "https://cdn.tuseco.com/luppo/repo/contrib".to_string(),
             description: "Community Repo for LupuS".to_string(),
             default_scope: "system".to_string(),
             mirrors: vec![
-                "https://cdn.antolun.com/luppo/repo/contrib/luppo-index.json.xz".to_string(),
+                "https://cdn.tuseco.com/luppo/repo/contrib/luppo-index.json.xz".to_string(),
             ],
         },
         PresetRepo {

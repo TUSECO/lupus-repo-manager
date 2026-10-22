@@ -2,7 +2,7 @@
 name = "lupus-repo-manager"
 version = "1.0.0"
 description = "LupuS Repository Manager — Luppo & Flatpak Repo Yöneticisi"
-authors = ["Solzic0 <solzic0@yandex.com>", "Antolun <admin@antolun.com>"]
+authors = ["Kurtürk <kurturkish@yandex.com>", "TUSECO <admin@tuseco.com>"]
 license = "GPL-3.0"
 edition = "2021"
 rust-version = "1.77.2"

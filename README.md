@@ -80,7 +80,7 @@ sudo luppo install libwebkit2gtk-devel gtk3-devel flatpak luppo
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/Antolun/lupus-repo-manager.git
+   git clone https://github.com/TUSECO/lupus-repo-manager.git
    cd lupus-repo-manager
    ```
 
@@ -141,8 +141,8 @@ repo-manager/
 
 ## 👥 Authors
 
-- **Solzic0** &lt;solzic0@yandex.com&gt;
-- **Antolun** &lt;admin@antolun.com&gt;
+- **Kurtürk** &lt;kurturkish@yandex.com&gt;
+- **TUSECO** &lt;admin@tuseco.com&gt;
 
 ---
 
